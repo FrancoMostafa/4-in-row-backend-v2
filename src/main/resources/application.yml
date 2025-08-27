@@ -1,0 +1,86 @@
+# Configuración principal de la aplicación
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api
+
+# Configuración de Spring
+spring:
+  application:
+    name: 4-in-row-backend-v2
+  
+  # MongoDB configuración
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/fourinrow_v2}
+      auto-index-creation: true
+  
+  # Cache configuración
+  cache:
+    type: simple
+    cache-names:
+      - games
+      - statistics
+  
+  # Configuración de Jackson
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: UTC
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+
+# Configuración de logging
+logging:
+  level:
+    com.fourinrow: ${LOG_LEVEL:INFO}
+    org.springframework.web.socket: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/fourinrow.log
+
+# Configuración de CORS
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,https://4enlinea.vercel.app}
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: '*'
+  allow-credentials: true
+
+# Configuración de la aplicación
+app:
+  game:
+    max-games-per-user: 5
+    game-timeout-minutes: 30
+    cleanup-interval-minutes: 10
+  websocket:
+    connection-timeout-seconds: 60
+    message-size-limit: 8192
+
+# Actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when_authorized
+  info:
+    git:
+      mode: full
+
+# Documentación API
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  info:
+    title: 4 en Línea API
+    description: API REST para el juego 4 en línea - Versión 2.0
+    version: 2.0.0
+    contact:
+      name: FrancoMostafa
+      url: https://github.com/FrancoMostafa

@@ -1,0 +1,17 @@
+# Configuración para producción
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+
+logging:
+  level:
+    com.fourinrow: INFO
+    root: WARN
+  file:
+    name: /app/logs/fourinrow.log
+
+management:
+  endpoint:
+    health:
+      show-details: never

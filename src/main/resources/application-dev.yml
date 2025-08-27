@@ -1,0 +1,18 @@
+# Configuración para desarrollo
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/fourinrow_dev
+
+logging:
+  level:
+    com.fourinrow: DEBUG
+    org.springframework.web.socket: DEBUG
+    org.springframework.data.mongodb: DEBUG
+
+app:
+  game:
+    cleanup-interval-minutes: 5
